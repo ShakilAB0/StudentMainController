@@ -3,9 +3,7 @@ package com.myStudent.StudentMainController.StudentMessageController;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.http.HttpStatus;
         import org.springframework.http.ResponseEntity;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RestController;
+        import org.springframework.web.bind.annotation.*;
 
 
     @RestController
@@ -25,6 +23,17 @@ public class MessageController {
                 WellcomeMessage.Greetings(),
                 HttpStatus.OK
         );
+
+        @PostMapping(path = "/create")
+        public ResponseEntity<String> registerNewStudent(@RequestBody Student student) {
+
+            WellcomeMessage.addNewStudent(student);
+
+            return new ResponseEntity<>(
+                    "Successfully created",
+                    HttpStatus.CREATED
+            );
+        }
     }
 }
 
